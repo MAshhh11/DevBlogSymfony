@@ -28,7 +28,7 @@ class Post
      * @ORM\Column(type="text")
      */
     private $content;
-    
+
     /**
      * @ORM\Column(type="datetime")
      */
@@ -128,7 +128,7 @@ class Post
     }
 
     /**
-     * @return Collection|Category[]
+     * @return Category[]|Collection
      */
     public function getCategory(): Collection
     {
@@ -161,5 +161,10 @@ class Post
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getCreationDate()
+    {
+        return date_format($this->createdAt, 'd/m/Y H:i');
     }
 }

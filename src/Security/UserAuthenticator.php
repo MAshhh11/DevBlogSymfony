@@ -84,6 +84,8 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     *
+     * @param mixed $credentials
      */
     public function getPassword($credentials): ?string
     {
@@ -97,6 +99,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         }
 
         return new RedirectResponse($this->urlGenerator->generate('app_admin'));
+
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

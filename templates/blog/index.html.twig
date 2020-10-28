@@ -4,12 +4,23 @@
 
 <section class="row">
     <h1 class="title">Welcome to DevBlog!</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores recusandae sit ea blanditiis, hic pariatur autem neque soluta quidem explicabo, molestiae ipsa expedita accusamus quaerat facere repellat illo maiores quo. Deleniti ad facilis soluta asperiores consequuntur, molestias nostrum esse odio, eveniet eum dolore libero, veritatis officiis earum. Facere, nostrum iure.</p>
+    
 </section>
 <section class="row">
-<p><small>We are using the controller: {{ controller_name }}</small></p>
-
-{# commentaire #}
+    {% for post in posts %}
+       
+        <div class="card mt-5 mx-2" style="width: 18rem;">
+        <div class="card-header">
+            <h5 class="card-title">{{post.title}}</h5>
+        </div>
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">{{post.user}}</h6>
+            <p class="card-text">{{post.content |raw}}</p>
+            <p><small>{{post.createdAt | date('d/m/Y H:i')}}</small></p>
+            <a href="{{path("app_blog_show", {id: post.id})}}" class="card-link btn btn-info">Voir l'article</a>
+        </div>
+</div>
+    {% endfor %}
 
 </section>
 

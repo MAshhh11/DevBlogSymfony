@@ -15,6 +15,7 @@
         </div>
         <div class="card-body">
             <h6 class="card-subtitle mb-2 text-muted">{{post.user}}</h6>
+            <img src="{{vich_uploader_asset(post)}}" class=" w-50" alt="...">
             <p class="card-text">{{post.content |raw}}</p>
             <p><small>{{post.createdAt | date('d/m/Y H:i')}}</small></p>
         </div>

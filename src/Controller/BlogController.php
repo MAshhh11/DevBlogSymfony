@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 class BlogController extends AbstractController
 {
@@ -33,9 +34,10 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog/{id}"), name="app_blog_show"
      */
-    public function show(Post $post, Request $request, Security $security, EntityManagerInterface $em)
+    public function show(Post $post, Request $request, Security $security, EntityManagerInterface $em, UploaderHelper $helper)
     {
         $comment = new Comments();
+        $path = $helper->asset($post);
 
         $form = $this->createFormBuilder($comment)
             ->add('content', TextareaType::class, [
@@ -71,6 +73,7 @@ class BlogController extends AbstractController
         return $this->render('blog/show.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
+            'path' => $path,
         ]);
     }
 }

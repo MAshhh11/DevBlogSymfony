@@ -6,9 +6,11 @@ use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
+ * @Vich\Uploadable
  */
 class Post
 {
@@ -50,10 +52,26 @@ class Post
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $thumbnail;
+
+    /**
+     * @Vich\UploadableField(mapping="thumbnails" , fileNameProperty="thumbnail")
+     */
+    private $thumbnailFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->category = new ArrayCollection();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -166,5 +184,75 @@ class Post
     public function getCreationDate()
     {
         return date_format($this->createdAt, 'd/m/Y H:i');
+    }
+
+    /**
+     * Get the value of thumbnailFile.
+     */
+    public function getThumbnailFile()
+    {
+        return $this->thumbnailFile;
+    }
+
+    /**
+     * Set the value of thumbnailFile.
+     *
+     * @param mixed $thumbnailFile
+     *
+     * @return self
+     */
+    public function setThumbnailFile($thumbnailFile)
+    {
+        $this->thumbnailFile = $thumbnailFile;
+
+        if ($thumbnailFile) {
+            $this->updatedAt = new \DateTime();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of thumbnail.
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+
+    /**
+     * Set the value of thumbnail.
+     *
+     * @param mixed $thumbnail
+     *
+     * @return self
+     */
+    public function setThumbnail($thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of updatedAt.
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set the value of updatedAt.
+     *
+     * @param mixed $updatedAt
+     *
+     * @return self
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

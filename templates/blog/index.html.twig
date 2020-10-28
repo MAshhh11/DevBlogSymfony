@@ -9,19 +9,21 @@
 <section class="row">
     {% for post in posts %}
        
-        <div class="card mt-5 mx-2" style="width: 18rem;">
-        <div class="card-header" >
-            <h5 class="card-title">{{post.title}}</h5>
-        </div>
-        <div class="card-body">
+      <div class="card" style="width: 18rem;">
+  <img src="{{vich_uploader_asset(post)}}" class="card-img-top" alt="...">
+  <div class="card-body">
             <h6 class="card-subtitle mb-2 text-muted">{{post.user}}</h6>
             <p class="card-text">{{post.content |raw}}</p>
             <p><small>{{post.createdAt | date('d/m/Y H:i')}}</small></p>
             <a href="{{path("app_blog_show", {id: post.id})}}" class="card-link btn btn-info">Voir l'article</a>
         </div>
+</div></div>
 </div>
     {% endfor %}
 
 </section>
 
 {% endblock %}
+
+
+

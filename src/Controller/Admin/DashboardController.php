@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
+use App\Entity\Comments;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -30,7 +32,9 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'icon class', EntityClass::class);
+        yield MenuItem::linktoDashboard('Dashboard', 'fas fa-tools');
+        yield MenuItem::linkToCrud('Category', 'fab fa-safari', Category::class);
+        yield MenuItem::linkToCrud('Comments', 'fas fa-calendar-plus', Comments::class);
+        yield MenuItem::linktoRoute('Retour à l\'accueil', 'fa fa-home', 'app_home');
     }
 }

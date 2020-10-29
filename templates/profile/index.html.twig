@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile index{% endblock %}
+
+{% block body %}
+    <h1>Profile index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.title }}</td>
+                <td>
+                    <a href="{{ path('app_blog_show', {'id': post.id}) }}">show</a>
+                    <a href="{{ path('category_edit', {'id': post.id}) }}">edit</a>
+                    <a href="{{ path('category_delete', {'id': post.id}) }}">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {# <a href="{{ path('category_new') }}">Create new</a> #}
+{% endblock %}

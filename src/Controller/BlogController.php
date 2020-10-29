@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Comments;
 use App\Entity\Post;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -102,6 +104,12 @@ class BlogController extends AbstractController
                     'class' => 'form-control-file',
                 ],
                 'label' => 'Image',
+            ])
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [

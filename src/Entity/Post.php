@@ -74,6 +74,11 @@ class Post
         $this->updatedAt = new \DateTime();
     }
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

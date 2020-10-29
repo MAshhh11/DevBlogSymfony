@@ -2,6 +2,6 @@ vich_uploader:
     db_driver: orm
 
     mappings:
-        thumbnails:
-            uri_prefix: /images/thumbnails
-            upload_destination: '%kernel.project_dir%/public/images/thumbnails'
+       thumbnails:
+           uri_prefix: /images/thumbnails
+           upload_destination: '%kernel.project_dir%/public/images/thumbnails'
